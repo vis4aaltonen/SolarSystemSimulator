@@ -1,3 +1,3 @@
-class Spaceobject {
+class Spaceobject extends Space {
 
 }
