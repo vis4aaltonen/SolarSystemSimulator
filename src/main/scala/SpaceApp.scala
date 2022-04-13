@@ -1,0 +1,3 @@
+object SpaceApp extends App {
+
+}
