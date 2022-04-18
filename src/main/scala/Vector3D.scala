@@ -17,7 +17,4 @@ class Vector3D (val x:Double, val y:Double, val z:Double){
     new Vector3D(constant * x, constant * y, constant * z)
   }
 
-
-
-
 }
