@@ -8,8 +8,9 @@ object SpaceApp extends App {
   avaruus.spaceObjects += maa
   println(avaruus.distance(aurinko, maa))
 
-  for (i <- 0 until 3650) {
+  for (i <- 0 until 1000) {
     avaruus.updatePosition(maa)
-    if ((i+30)%365==0) println("maan kordinaatit: " + maa.position.x + " ja "+ maa.position.y)
+    //if ((i+30)%365==0) println("maan kordinaatit: " + maa.position.x + " ja "+ maa.position.y)
+    println(avaruus.distance(maa,aurinko))
   }
 }
