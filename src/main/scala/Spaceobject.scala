@@ -3,8 +3,9 @@ import Space.{G, distance}
 import java.awt.Graphics2D
 import java.awt.geom._
 import scala.math.{abs, pow}
+import java.awt.Color
 
-case class Spaceobject(val name:String, var position: Vector3D, var velocity: Vector3D, val mass: Double) {
+case class Spaceobject(val name:String, var position: Vector3D, var velocity: Vector3D, val mass: Double, val diameter: Double, val color: Color) {
 
   val SCALE = 200/ (1.4960*pow(10,11))
 
@@ -31,10 +32,11 @@ case class Spaceobject(val name:String, var position: Vector3D, var velocity: Ve
   }
 
   def draw(g: Graphics2D) = {
+    g.setColor(color)
     val oldTransform = g.getTransform()
 
-    g.translate(scaledPos.x.toInt+500/2, scaledPos.y.toInt+500/2)
-    g.fill(new Ellipse2D.Double(30.0, 30.0, 40.0, 40.0))
+    g.translate(scaledPos.x.toInt+700/2, scaledPos.y.toInt+700/2)
+    g.fill(new Ellipse2D.Double(0.0, 0.0, diameter, diameter))
 
     g.setTransform(oldTransform)
   }

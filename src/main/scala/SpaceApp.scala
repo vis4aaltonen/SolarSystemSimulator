@@ -1,13 +1,15 @@
 
 import java.awt.event.{ActionEvent, ActionListener}
-import java.awt.{Color, Graphics2D, RenderingHints}
+import java.awt.{Color, Graphics2D}
+import scala.swing.BorderPanel.Position._
 import scala.swing._
+
 
 object SpaceApp extends SimpleSwingApplication {
 
-  val width      = 600
-  val height     = 600
-  val fullHeight = 610
+  val width      = 800
+  val height     = 800
+  val fullHeight = 810
 
   def top = new MainFrame {
 
@@ -19,21 +21,33 @@ object SpaceApp extends SimpleSwingApplication {
     maximumSize   = new Dimension(width,fullHeight)
 
     val arena = new Panel {
-
-
       override def paintComponent(g: Graphics2D) = {
-         g.setColor(new Color(80, 180, 235))
+         g.setColor(new Color(0, 0, 40))
          g.fillRect(0, 0, width, fullHeight)
 
-         g.setColor(Color.white)
          Space.draw(g)
        }
-
-
-
     }
 
-    contents = arena
+
+
+    contents = new BorderPanel {
+      layout += new BorderPanel {
+        layout += new GridPanel(2,1) {
+          contents += new BorderPanel {
+            layout += new Label("new satellite") -> West
+            layout += new TextField() -> Center
+            layout += new Button("Submit") -> East
+          }
+          contents += new BorderPanel {
+            layout += new Label("in form of: startingpos (x,y,z); startingvel (x,y,z); mass") -> Center
+          }
+        } -> North
+        layout += arena -> Center
+      } -> Center
+    }
+
+
 
     var count = 0
 
@@ -47,7 +61,7 @@ object SpaceApp extends SimpleSwingApplication {
       }
     }
 
-    val timer = new javax.swing.Timer(50, listener)
+    val timer = new javax.swing.Timer(5, listener)
     timer.start()
   }
 }

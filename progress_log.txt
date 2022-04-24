@@ -5,3 +5,8 @@ Worked on rk4 for 15 hours. There is something wrong and I'm unable to fix it
 Changed algortihm to easy gravitational Vector based. Works well. Took me 5 hours. I have tested it with UI.
 
 Now starting to work on GUI.
+
+GUI working and looking amazing!! Worked with it around 10 hours.
+
+Now starting to make it possible for user to add satellites. Got already the boxes to fill in, now just needs some work on functionality!!
+Took me 5 hours to realise how the boxes work in swing.
