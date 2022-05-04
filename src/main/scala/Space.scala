@@ -12,7 +12,7 @@ object Space {
   var viewScale = 0
 
 
-
+  //Stores all the objects
   val spaceObjects = Buffer[Spaceobject]()
 
   val aurinko = Spaceobject("Sun", new Vector3D(0.0,0.0,0.0), new Vector3D(0.0,0.0,0.0), 1.989*pow(10,30), 30.0, new Color(255,180,0), false)
@@ -39,7 +39,7 @@ object Space {
   spaceObjects += uranus
   spaceObjects += neptunus
 
-
+  //method for calculating distances
   def distance(a:Spaceobject, b:Spaceobject) = (a.position.-(b.position)).length
 
   def updatePosition(a:Spaceobject): Unit = {
@@ -65,8 +65,10 @@ object Space {
     a.scaledPos = a.scaledPos.+(new Vector3D(a.velocity.x*TIMESTEP*SCALE, a.velocity.y*TIMESTEP*SCALE, a.velocity.z*TIMESTEP*SCALE))
   }
 
+  //advances one sted
   def step() = spaceObjects.foreach(updatePosition(_))
 
+  //draws each spaceobject
   def draw(g: Graphics2D) = spaceObjects.foreach(_.draw(g, viewAngle, viewScale))
 
 }

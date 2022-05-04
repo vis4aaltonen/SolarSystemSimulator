@@ -7,9 +7,10 @@ import java.awt.Color
 
 case class Spaceobject(val name:String, var position: Vector3D, var velocity: Vector3D, val mass: Double, val diameter: Double, val color: Color, val satellite: Boolean) {
 
+  //stores the position for drawing
   var scaledPos = new Vector3D(position.x*Space.SCALE, position.y*Space.SCALE, position.z*Space.SCALE)
 
-
+  //calculates x,y,z components of Force
   def gravitationForces(a: Spaceobject, b: Spaceobject) = {
     var forceX = 0.0
     var forceY = 0.0
@@ -30,12 +31,14 @@ case class Spaceobject(val name:String, var position: Vector3D, var velocity: Ve
     (forceX, forceY, forceZ)
   }
 
+  //draws the objects with right color and size
   def draw(g: Graphics2D, view: Int, scale: Int) = {
 
     g.setColor(color)
     val oldTransform = g.getTransform()
-
+    //view in (x,y) coordinates
     if (view%2 ==0)  {
+      //changes the scale from smaller to larger and back to smaller again
       if (scale%5 ==0) {
         g.translate(scaledPos.x.toInt+700/2, scaledPos.y.toInt+700/2)
         g.fill(new Ellipse2D.Double(-diameter/2, -diameter/2, diameter, diameter))
@@ -57,7 +60,9 @@ case class Spaceobject(val name:String, var position: Vector3D, var velocity: Ve
         else g.fill(new Ellipse2D.Double(ceil(-diameter/10), ceil(-diameter/10), ceil(diameter/5), ceil(diameter/5)))
       }
     }
+    //view in (x,z) coordinates
     else {
+      //changes the scale from smaller to larger and back to smaller again
       if (scale%5 ==0) {
         g.translate(scaledPos.x.toInt+700/2, scaledPos.z.toInt+700/2)
         g.fill(new Ellipse2D.Double(-diameter/2, -diameter/2, diameter, diameter))

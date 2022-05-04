@@ -29,6 +29,7 @@ object SpaceApp extends SimpleSwingApplication {
     preferredSize = new Dimension(width,fullHeight)
     maximumSize   = new Dimension(width,fullHeight)
 
+    //the visual space
     val arena = new Panel {
       override def paintComponent(g: Graphics2D) = {
 
@@ -39,6 +40,7 @@ object SpaceApp extends SimpleSwingApplication {
        }
     }
 
+    //functional parts of GUI
     val submitButton = new Button("Submit")
     val textField = new TextField()
     val viewAngle = new Button("View (x,y)/(x,z)")
@@ -51,7 +53,7 @@ object SpaceApp extends SimpleSwingApplication {
     val helpButton = new Button("Help?")
 
 
-
+    //the structure of GUI
     val all = new BorderPanel {
       layout += new BorderPanel {
         layout += new GridPanel(2,1) {
@@ -81,6 +83,7 @@ object SpaceApp extends SimpleSwingApplication {
     }
     contents = all
 
+    //reacts to these
     listenTo(submitButton)
     listenTo(viewAngle)
     listenTo(dropDown)
@@ -89,7 +92,7 @@ object SpaceApp extends SimpleSwingApplication {
     listenTo(resetButton)
     listenTo(helpButton)
 
-
+    //how it reacts
     reactions += {
       case painoi: ButtonClicked => {
         val lahde = painoi.source
@@ -171,7 +174,6 @@ object SpaceApp extends SimpleSwingApplication {
         }
       }
     }
-
 
 
 
