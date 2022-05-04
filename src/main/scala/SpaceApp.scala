@@ -102,8 +102,10 @@ object SpaceApp extends SimpleSwingApplication {
               val velCoords = inputs(2).split(",").map(_.trim)
               if (posCoords.length == 3 && velCoords.length == 3) {
                 if (Space.spaceObjects.forall(_.name!=name)) {
-                  try Space.spaceObjects += new Spaceobject(name, new Vector3D(posCoords(0).toDouble*AU,posCoords(1).toDouble*AU,posCoords(2).toDouble*AU), new Vector3D(velCoords(0).toDouble*1000,velCoords(1).toDouble*1000,velCoords(2).toDouble*1000), inputs(3).toDouble, 2.7, new Color(200,0,255), true)
-                  catch {
+                  try {
+                    Space.spaceObjects += new Spaceobject(name, new Vector3D(posCoords(0).toDouble*AU,posCoords(1).toDouble*AU,posCoords(2).toDouble*AU), new Vector3D(velCoords(0).toDouble*1000,velCoords(1).toDouble*1000,velCoords(2).toDouble*1000), inputs(3).toDouble, 2.7, new Color(200,0,255), true)
+                    arena.repaint()
+                  } catch {
                     case e:Exception => Dialog.showMessage(all,"Error, check the form.")
                   }
                 } else Dialog.showMessage(all,"An object with this name already exists")
@@ -154,7 +156,10 @@ object SpaceApp extends SimpleSwingApplication {
           Space.viewScale += 1
           arena.repaint()
         } else if (lahde.text == "Start/Stop") starter += 1
-        else if (lahde.text == "Reset") dayCount = 0
+        else if (lahde.text == "Reset")  {
+          dayCount = 0
+          dayLabel.text = "Days from start: " + floor(dayCount/24).toInt.toString
+        }
         else if (lahde.text == "Help?") {
           Dialog.showMessage(all, "Welcome to the Solar System simulator!\n" +
             "Commands to write in the textline:\n" +
